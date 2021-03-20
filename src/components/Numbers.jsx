@@ -1,25 +1,25 @@
 import React from 'react'
 import Button from './Button';
+import PropTypes from 'prop-types';
 
-const Numbers = () => {
-    const clickHandlerFunction = text => {
-        console.log('desde app: ' + text)
-    }
-
+const Numbers = ({ onClickNumber }) => {
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+    const buttonList = numbers.map((number) =>
+        <Button
+            key={number}
+            text={number.toString()}
+            clickHandler={onClickNumber}
+        />
+    );
     return (
-        <div className="numbers">
-            <Button text='1' clickHandler={clickHandlerFunction} />
-            <Button text='2' clickHandler={clickHandlerFunction} />
-            <Button text='3' clickHandler={clickHandlerFunction} />
-            <Button text='4' clickHandler={clickHandlerFunction} />
-            <Button text='5' clickHandler={clickHandlerFunction} />
-            <Button text='6' clickHandler={clickHandlerFunction} />
-            <Button text='7' clickHandler={clickHandlerFunction} />
-            <Button text='8' clickHandler={clickHandlerFunction} />
-            <Button text='9' clickHandler={clickHandlerFunction} />
-            <Button text='0' clickHandler={clickHandlerFunction} />
-        </div>
+        <section className="numbers">
+            {buttonList}
+        </section>
     )
+}
+
+Numbers.propTypes = {
+    onClickNumber: PropTypes.func.isRequired
 }
 
 export default Numbers
