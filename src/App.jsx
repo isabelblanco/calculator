@@ -1,4 +1,3 @@
-/* eslint no-eval: 0 */
 import React, { useState } from 'react'
 import './App.css'
 import Numbers from './components/Numbers'
@@ -15,26 +14,26 @@ const App = () => {
 
     return (
         <main className='react-calculator'>
-            <Result value={result} />
+            <Result value={result.toString()} />
             <Numbers
                 onClickNumber={number => {
-                    setResult(number)
+                    setResult(`${result}${number}`)
                 }}
             />
             <Functions
                 onContentClear={clear =>
-                    console.log('Clear: ', clear)
+                    setResult('')
                 }
                 onDelete={deleteLast =>
-                    console.log(deleteLast)
+                    setResult(result.slice(0, -1))
                 }
             />
             <MathOperations
                 onClickOperation={operation =>
-                    console.log('Operation: ', operation)
+                    setResult(`${result}${operation}`)
                 }
                 onClickEqual={equal =>
-                    console.log('Equal: ', equal)
+                    setResult(eval(result))
                 }
             />
         </main>
